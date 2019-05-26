@@ -128,7 +128,7 @@ int main()
 
                case 1 : //New Record
 
-                     phbk.open("phonbk.dat", ios::ate|ios::in|ios::out);
+                     phbk.open("phonbk.dat", ios::binary|ios::out|ios::app);
                      rec.getdata();
                      phbk.write((char *)&rec, sizeof(rec));
                      system("cls");
@@ -137,27 +137,28 @@ int main()
                      break;
 
                case 2 : //Display All Records
-
+                     num=0;//if display a record is called more than 1 time, then the value of num will add up every time, without this
                      phbk.open("phonbk.dat",ios::in|ios::binary);
                      cout<<"\n\n\t\t Records in Phone Book:\n";
-                     phbk.read((char *)&rec, sizeof(rec));
+                     
                      system("cls");
                      cout<<"\n\n\t\t\t\t   ---RECORDS -----";
                      cout<<"\n\n\n\t\t\t "<<"Name"<<"\t"<<"Mobile Number\n";
                      cout<<"\t\t\t ____\t_____________\n\n";
 
-                     while(!(phbk.eof()))
+                     while(phbk.read((char *)&rec, sizeof(rec)))
                          {
                              rec.showdata();
-                             phbk.read((char *)&rec, sizeof(rec));
                              cout<<"\n\n\t\t";
                              num++;
                          }
-                         cout<<"\v \t\t"<<num<<" Records found"; break;
+                         cout<<"\v \t\t"<<num<<" Records found";
+                         phbk.close();
+                         break;
 
               case 3 : //Search Tel. no. when person name is known.
 
-                     phbk.open("phonbk.dat");
+                     phbk.open("phonbk.dat",ios::binary|ios::in);
                      system("cls");
                      cout<<"\n\n\t\tEnter Name : ";
                      cin>>nm;
@@ -166,6 +167,7 @@ int main()
                      phbk.read((char *) &rec, sizeof(rec));
                      while(!(phbk.eof()))
                      {
+                         phbk.read((char *)&rec, sizeof(rec));
                         if(strcmp(nm,rec.getname())==0)
                         {
                             found++;
