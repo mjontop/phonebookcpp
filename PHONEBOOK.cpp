@@ -131,7 +131,7 @@ int main()
 
 			case 1: //New Record
 
-				phbk.open("phonbk.dat", ios::ate | ios::in | ios::out);
+				phbk.open("phonbk.dat", ios::binary | ios::ate | ios::out);
 				rec.getdata();
 				phbk.write((char*)& rec, sizeof(rec));
 				system("cls");
@@ -177,15 +177,15 @@ int main()
 
 				system("cls");
 				cout << "\n\n\t\tEnter Name : ";
-				cin >> nm;
+				cin >> telno;
 				phbk.seekg(0, ios::beg);
 				found = 0;
 				phbk.read((char*)& rec, sizeof(rec));
 				while (!(phbk.eof()))
 				{
-					if (strcmp(nm, rec.getname()) == 0)
+					if (strcmp(telno, rec.getphno()) == 0)
 					{
-						found++;
+						found = 1;
 						rec.showdata();
 						break;
 
@@ -208,12 +208,12 @@ int main()
 
 				system("cls");
 				cout << "\n\n\t\t\tEnter Telephone No : ";
-				cin >> telno;
+				cin >> nm;
 				phbk.seekg(0, ios::beg);
 				found = 0;
 				while (phbk.read((char*)& rec, sizeof(rec)))
 				{
-					if (strcmp(telno, rec.getphno()) == 0)
+					if (strcmp(nm, rec.getname()) == 0)
 					{
 						found = 1;
 						rec.showdata();
