@@ -7,6 +7,8 @@
 using namespace std;
 char password[8];
 
+int check;
+
 class account
 {
 	char username[10];
@@ -140,6 +142,12 @@ int main()
 			case 2: //Display All Records
 
 				phbk.open("phonbk.dat", ios::in | ios::binary);
+				if (phbk.fail()) {
+					cout << "\n\n\t\t\t No records are there !!";
+					cout << "\n\n\t\t\t Please add new Records first....";
+					break;
+				}
+
 				cout << "\n\n\t\t Records in Phone Book:\n";
 				phbk.read((char*)& rec, sizeof(rec));
 				system("cls");
@@ -154,11 +162,19 @@ int main()
 					cout << "\n\n\t\t";
 					num++;
 				}
-				cout << "\v \t\t" << num << " Records found"; break;
+				cout << "\v \t\t" << num << " Records found";
+				phbk.close();
+				break;
 
 			case 3: //Search Tel. no. when person name is known.
 
 				phbk.open("phonbk.dat");
+				if (phbk.fail()) {
+					cout << "\n\n\t\t\t file open failed. Want to add new records !!!";
+					cout << "\n\n\t\t\t Please Go to menu number 1";
+					break;
+				}
+
 				system("cls");
 				cout << "\n\n\t\tEnter Name : ";
 				cin >> nm;
@@ -184,6 +200,12 @@ int main()
 			case 4: //Search name on basis of tel. no
 
 				phbk.open("phonbk.dat");
+				if (phbk.fail()) {
+					cout << "\n\n\t\t\t file open failed. Want to add new records !!!";
+					cout << "\n\n\t\t\t Please Go to menu number 1";
+					break;
+				}
+
 				system("cls");
 				cout << "\n\n\t\t\tEnter Telephone No : ";
 				cin >> telno;
@@ -200,17 +222,24 @@ int main()
 				phbk.clear();
 				if (found == 0)
 					cout << "\n\n\t\t\t--- SORRY  Record Not found---\n";
+				phbk.close();
 				break;
 
 			case 5: ChangePassword(); break;
-				//case 6: DeleteAllRECD(); break;
+			case 6:
 
+				check = remove("phobk.dat");
 
-
-				cout << "\n\n\t\t\tDo you Wants to Continue?(y/n)";
-				cin >> ch;
-				system("cls");
+				if (check == 0)
+					cout << "\n\n\t\t\t Remove complete !!!";
+				else
+					cout << "\n\n\t\t\t No records to be removed.... Sorry";
+				break;
 			}
+
+			cout << "\n\n\t\t\tDo you Wants to Continue?(y/n)";
+			cin >> ch;
+			system("cls");
 		}
 	}
 	cout << " \n\n\n\n\t\t\t THANK YOU FOR USING OUR APPLICATION\\n\n\t\t\t FOR MORE UPDATES FOLLOW us @mjontop_\n\n\n\n";
