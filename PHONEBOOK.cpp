@@ -162,7 +162,7 @@ int main()
 					cout << "\n\n\t\t";
 					num++;
 				}
-				cout << "\v \t\t" << num << " Records found";
+				cout << "\n\n\t\t\t\t" << num << " Records found";
 				phbk.close();
 				break;
 
@@ -176,7 +176,7 @@ int main()
 				}
 
 				system("cls");
-				cout << "\n\n\t\tEnter Name : ";
+				cout << "\n\n\t\tEnter Telphone No : ";
 				cin >> telno;
 				phbk.seekg(0, ios::beg);
 				found = 0;
@@ -207,7 +207,7 @@ int main()
 				}
 
 				system("cls");
-				cout << "\n\n\t\t\tEnter Telephone No : ";
+				cout << "\n\n\t\t\tEnter Name : ";
 				cin >> nm;
 				phbk.seekg(0, ios::beg);
 				found = 0;
