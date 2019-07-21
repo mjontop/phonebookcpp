@@ -228,7 +228,7 @@ int main()
 			case 5: ChangePassword(); break;
 			case 6:
 
-				check = remove("phobk.dat");
+				check = remove("phonbk.dat");
 
 				if (check == 0)
 					cout << "\n\n\t\t\t Remove complete !!!";
